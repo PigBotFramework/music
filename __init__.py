@@ -15,36 +15,30 @@ _cost = 0.00
 class music(PBF):
     def __enter__(self):
         return [
-            RegCmd(
-                name = "搜歌 ",
-                usage = "搜歌 <歌曲名>[ <页数>]",
-                permission = "anyone",
-                function = "music@play_music",
-                description = "搜索歌曲，不加页数则默认为第一页",
-                mode = "音乐系统",
-                hidden = 0,
-                type = "command"
-            ),
-            RegCmd(
-                name = "播歌 ",
-                usage = "播歌 <搜歌中给出的歌曲ID或者直接加歌名>",
-                permission = "anyone",
-                function = "music@get_music_url",
-                description = "播放歌曲，如果后面是歌曲ID，则播放相应歌曲，如果是歌名，则会先搜索再播放第一条搜索结果",
-                mode = "音乐系统",
-                hidden = 0,
-                type = "command"
-            ),
-            RegCmd(
-                name = "热搜列表",
-                usage = "热搜列表[ <显示个数>]",
-                permission = "anyone",
-                function = "music@music_hot_search",
-                description = "查看网易云热搜列表",
-                mode = "音乐系统",
-                hidden = 0,
-                type = "command"
-            )
+    @RegCmd(
+        name = "搜歌 ",
+        usage = "搜歌 <歌曲名>[ <页数>]",
+        permission = "anyone",
+        function = "music@play_music",
+        description = "搜索歌曲，不加页数则默认为第一页",
+        mode = "音乐系统"
+    )
+    @RegCmd(
+        name = "播歌 ",
+        usage = "播歌 <搜歌中给出的歌曲ID或者直接加歌名>",
+        permission = "anyone",
+        function = "music@get_music_url",
+        description = "播放歌曲，如果后面是歌曲ID，则播放相应歌曲，如果是歌名，则会先搜索再播放第一条搜索结果",
+        mode = "音乐系统"
+    )
+    @RegCmd(
+        name = "热搜列表",
+        usage = "热搜列表[ <显示个数>]",
+        permission = "anyone",
+        function = "music@music_hot_search",
+        description = "查看网易云热搜列表",
+        mode = "音乐系统"
+    )
         ]
     
     def get_all_hotSong(self):  # 获取热歌榜所有歌曲名称和id
