@@ -8,7 +8,7 @@ try:
 except ImportError:
     import pip
 
-    pip._internal.cli.main.main(['install', "pyncm"])
+    pip.main(['install', "pyncm"])
     from pyncm import apis
 from pbf.utils.RegCmd import RegCmd
 
@@ -50,7 +50,7 @@ class music(PBF):
     )
     def music_hot_search(self):
         # data = apis.playlist.GetTopPlaylists()
-        # data = requests.get(self.botSettings.get('musicApi')+'search/hot/detail').json().get('data')
+        # data = requests.get(self.botSettings._get('musicApi')+'search/hot/detail').json().get('data')
         data = self.get_all_hotSong()
         message = '[CQ:face,id=189] 网易云热搜列表：'
 
@@ -62,7 +62,7 @@ class music(PBF):
         self.client.msg().raw(message)
 
     def search_music(self, song, page=1):
-        return apis.cloudsearch.GetSearchResult(keyword=song, limit=self.data.botSettings.get('musicApiLimit'), offset=(page - 1) * self.data.botSettings.get('musicApiLimit')).get('result').get('songs')
+        return apis.cloudsearch.GetSearchResult(keyword=song, limit=self.data.botSettings._get('musicApiLimit'), offset=(page - 1) * self.data.botSettings._get('musicApiLimit')).get('result').get('songs')
 
     @RegCmd(
         name="搜歌 ",
@@ -94,7 +94,7 @@ class music(PBF):
             page = 1
             song = message
 
-        self.client.msg().raw('limit={0}, offset={1}'.format(self.data.botSettings.get('musicApiLimit'), (page - 1) * self.data.botSettings.get('musicApiLimit')))
+        self.client.msg().raw('limit={0}, offset={1}'.format(self.data.botSettings._get('musicApiLimit'), (page - 1) * self.data.botSettings._get('musicApiLimit')))
 
         message = '[CQ:face,id=189] 歌曲：' + str(song) + ' 的搜索结果'
         for i in self.search_music(song):
